@@ -1,6 +1,6 @@
 # zhihu
 
-> a demo
+> A demo based on zhihu Daily API.
 
 ## Build Setup
 
