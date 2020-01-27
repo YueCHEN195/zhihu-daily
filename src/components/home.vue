@@ -23,7 +23,7 @@
     <ul v-infinite-scroll="loadmore"
         infinite-scroll-distance="10"
         infinite-scroll-disabled="loading"
-        infinite-scroll-immediate-check="false">
+        infinite-scroll-immediate-check="fasle">
       <router-link tag="li" v-for="item in otherNews" :key="item.id" class="news-list" :to="'/home/newsinfo/' + item.id ">
         <div class="list-word">
           <div class="list-title" id="list-word">{{item.title}}</div>
@@ -53,12 +53,19 @@ export default {
       page: 0,
       index: '',
       loading: false,
-      loadTexing: '正在努力加载~~'
+      loadTexing: '正在努力加载~~',
+      toastMsg: { message: '努力加载中~', position: 'bottom' }
     }
   },
   created(){
     this.getLastNews()
   },
+  activated(){
+      this.loading = false
+    },
+    deactivated() {
+      this.loading = true
+    },
   methods: {
     getLastNews(){
       this.$http.get('/zhihu/4/news/latest').then(res => {
@@ -68,11 +75,14 @@ export default {
         }
         this.otherNews = this.otherNews.concat(res.body.stories)
         this.date = res.body.date
+        this.index = (parseInt(this.date) - this.page).toString()
+        return this.$http.get('/zhihu/4/news/before/' + this.index)
       }, err => {
-        Toast({
-          message: '努力加载中~',
-          position: 'bottom'
-        })
+        Toast(this.toastMsg)
+      }).then(res => {
+        this.otherNews = this.otherNews.concat(res.body.stories)  //继续往前加载一次防止消息不能占满屏幕无法触发滚动
+      },err => {
+        Toast(this.toastMsg)
       })
     },
     getListByPage(){
@@ -80,10 +90,7 @@ export default {
       this.$http.get('/zhihu/4/news/before/' + this.index).then(res => {
         this.otherNews = this.otherNews.concat(res.body.stories)
       },err =>{
-        Toast({
-          message: '努力加载中~',
-          position: 'bottom'
-        })
+        Toast(this.toastMsg)
       })
       this.loading = false
     },
@@ -97,7 +104,7 @@ export default {
         var two = str.substring(4,6)
         var three = str.substring(6,8)
         return[parseInt('0x' + one),parseInt('0x' + two),parseInt('0x' + three)]
-    },
+    }
   }
 }
 </script>

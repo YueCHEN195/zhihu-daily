@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content-page" :id="id">
     <div :style="{backgroundImage: 'url(' + newsinfo.image + ')',
         backgroundRepeat:'no-repeat',backgroundSize:'100% 100%'}" class="content-header">
         <div class="cover" v-if = "newsinfo.rgb"
@@ -13,16 +13,22 @@
         </div>
     </div>
     <div v-html="newsinfo.body" class="detail-content"></div>
+    <Footer :id="id"></Footer>
   </div>
 </template>
 
 <script>
+import Footer from '../components/subcoms/footer.vue'
+
 export default {
   data(){
     return{
       id: this.$route.params.id,
       newsinfo:{}
     }
+  },
+  components:{
+    Footer
   },
   created(){
     this.getContent()
@@ -45,30 +51,35 @@ export default {
 </script>>
 
 <style lang="scss" rel="stylesheet/scss">
-.content-header{
-  width: 100%;
-  height: 400px;
-  color:#fff;
-  display: flex;
-  flex-direction: column-reverse;
-  .cover{    
-    height: 50%;
+.content-page{
+  display:flex;
+  flex-direction: column;
+  .content-header{
     width: 100%;
+    height: 400px;
+    color:#fff;
     display: flex;
     flex-direction: column-reverse;
-  }
-  .author{
-    margin:10px;
-    font-size:13px;
-    opacity: 0.8;
-  }
-  .title{
-    margin:10px;
-    font-weight: 600;
-    font-size: 20px;
+    .cover{    
+      height: 50%;
+      width: 100%;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .author{
+      margin:10px;
+      font-size:13px;
+      opacity: 0.8;
+    }
+    .title{
+      margin:10px;
+      font-weight: 600;
+      font-size: 20px;
+    }
   }
 }
   .detail-content{
+    margin-bottom: 50px;
     article,
     aside,
     details,

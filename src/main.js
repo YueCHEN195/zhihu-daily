@@ -17,7 +17,6 @@ Vue.use(VueRouter)
 
 Vue.use(VueResource)
 
-
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
