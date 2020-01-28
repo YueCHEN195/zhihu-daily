@@ -1,5 +1,11 @@
 <template>
   <div>
+    <!-- header -->
+    <header class="header-container">
+      <img src = "../assets/arrow_left.png" @click="back">
+      <h4 class="comment-amount">{{totalComments}}条评论</h4>
+    </header>
+    <!-- 长评论 -->
     <ul>
       <li class="comments-container" v-for="item in longComments" :key="item.id">
         <div class="pic">
@@ -8,7 +14,7 @@
         <div class="comments">
           <div class="name">{{item.author}}</div>
           <div class="content">{{item.content}}</div>
-          <div class="replay" v-if="item.reply_to!=undefined" &&  item.reply_to.author!=undefined >{{'// ' + item.reply_to.author + ' ： '+ item.reply_to.content}}</div>
+          <div class="replay" v-if="item.reply_to!=undefined && item.reply_to.author!=undefined">{{'// ' + item.reply_to.author + ' ： '+ item.reply_to.content}}</div>
           <div class="others">
             <div>{{item.time}}</div>
             <div class="icon-container"><span>{{item.likes}}</span><img src='../assets/greygood.png'></div>
@@ -16,7 +22,7 @@
         </div>
       </li>
     </ul>
-
+    <!-- 段评论 -->
     <ul>
       <li class="comments-container" v-for="item in shortComments" :key="item.id">
         <div class="pic">
@@ -25,7 +31,7 @@
         <div class="comments">
           <div class="name">{{item.author}}</div>
           <div class="content">{{item.content}}</div>
-          <div class="replay" v-if=" item.reply_to!=undefined &&  item.reply_to.author!=undefined ">{{'// ' + item.reply_to.author + ' ： '+ item.reply_to.content}}</div>
+          <div class="replay" v-if=" item.reply_to!=undefined &&  item.reply_to.author!=undefined">{{'// ' + item.reply_to.author + ' ： '+ item.reply_to.content}}</div>
           <div class="others">
             <div>{{item.time}}</div>
             <div class="icon-container"><span>{{item.likes}}</span><img src='../assets/greygood.png'></div>
@@ -45,7 +51,9 @@ export default {
       id: this.$route.params.id,
       longComments:[],
       shortComments:[],
-      totalComments: 0
+      totalComments: 0,
+      longCommentsN:0,
+      shortCommentsN:0
     }
   },
   created(){
@@ -58,9 +66,14 @@ export default {
         this.longComments = res.body.comments
         return this.$http.get('/zhihu/4/story/' + this.id + '/short-comments')
       }).then(res => {
-        console.log(res.body)
         this.shortComments = res.body.comments
+        this.longCommentsN = this.longComments.length
+        this.shortCommentsN = this.shortComments.length
+        this.totalComments = this.longCommentsN + this.shortCommentsN
       })
+    },
+    back(){
+      this.$router.go(-1)
     }
   }
 }
@@ -72,6 +85,20 @@ li ul{
   margin:0;
   list-style:none;
   padding-inline-start: 0px;
+}
+.header-container{
+  display:flex;
+  width:58%;
+  height: 40px;
+  background-color: #ffffff;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #f8f8f8;
+  justify-content: space-between;
+  align-items: center;
+  img{
+    width:30px;
+    height:30px;
+  }
 }
 .comments-container{
   display: flex;

@@ -46,7 +46,7 @@ export default {
       var three = str.substring(6,8)
       return[parseInt('0x' + one),parseInt('0x' + two),parseInt('0x' + three)]
     }
-  }
+  },
 }
 </script>>
 
