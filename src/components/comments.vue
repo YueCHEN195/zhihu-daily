@@ -6,7 +6,7 @@
       <h4 class="comment-amount">{{totalComments}}条评论</h4>
     </header>
     <!-- 长评论 -->
-    <ul>
+    <ul class="long-comments">
       <li class="comments-container" v-for="item in longComments" :key="item.id">
         <div class="pic">
           <img :src="item.avatar">
@@ -59,7 +59,6 @@ export default {
   created(){
     this.getLongComments()
   },
-
   methods:{
     getLongComments(){
       this.$http.get('/zhihu/4/story/' + this.id + '/long-comments').then(res => {
@@ -75,7 +74,11 @@ export default {
     back(){
       this.$router.go(-1)
     }
-  }
+  },
+  beforeRouteLeave (to, from, next) {
+    to.meta.keepAlive = true
+    next()
+  },
 }
 </script>
 
@@ -95,10 +98,15 @@ li ul{
   border-bottom: 1px solid #f8f8f8;
   justify-content: space-between;
   align-items: center;
+  position:fixed;
+  top:0;
   img{
     width:30px;
     height:30px;
   }
+}
+.long-comments{
+  margin-top:40px;
 }
 .comments-container{
   display: flex;

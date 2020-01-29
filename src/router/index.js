@@ -8,7 +8,7 @@ var router = new VueRouter({
   routes: [
     {path:'/',redirect:'/home'},
     {path: '/home', component: home, meta:{ keepAlive: true} },
-    {path: '/home/newsinfo/:id',component: content },
+    {path: '/home/newsinfo/:id',component: content ,meta:{ keepAlive: true}},
     {path: '/home/newsinfo/comments/:id',component:comment }
   ]
 })

@@ -3,7 +3,7 @@
   <!-- 顶部状态栏 -->
   <Header></Header>
     <!-- 轮播图 -->
-    <mt-swipe :auto="6000">
+    <mt-swipe :auto="5000">
       <mt-swipe-item v-for="item in topNews" :key="item.id" :style="{backgroundImage: 'url(' + item.image + ')',
         backgroundRepeat:'no-repeat',backgroundSize:'100% 100%'}">
         <router-link :to="'/home/newsinfo/' + item.id " tag="div" class="link">
@@ -70,13 +70,13 @@ export default {
     getLastNews(){
       this.$http.get('/zhihu/4/news/latest').then(res => {
         this.topNews = res.body.top_stories
-        for(var item of this.topNews){
+        for(let item of this.topNews){
           item.rgb = this.hugToRgb(item.image_hue)
         }
         this.otherNews = this.otherNews.concat(res.body.stories)
         this.date = res.body.date
-        this.index = (parseInt(this.date) - this.page).toString()
-        return this.$http.get('/zhihu/4/news/before/' + this.index)
+        console.log(this.date)
+        return this.$http.get('/zhihu/4/news/before/' + this.date)
       }, err => {
         Toast(this.toastMsg)
       }).then(res => {
@@ -86,7 +86,7 @@ export default {
       })
     },
     getListByPage(){
-      this.index = (parseInt(this.date) - this.page).toString()
+      this.index = this.reduceDate(this.date,this.page)
       this.$http.get('/zhihu/4/news/before/' + this.index).then(res => {
         this.otherNews = this.otherNews.concat(res.body.stories)
       },err =>{
@@ -105,7 +105,16 @@ export default {
         var three = str.substring(6,8)
         return[parseInt('0x' + one),parseInt('0x' + two),parseInt('0x' + three)]
     },
-  },
+    reduceDate(datestr,page){
+      datestr = datestr.substring(0,4) + '-' + datestr.substring(4,6) + '-' + datestr.substring(6,8)
+      var d = new Date(datestr)
+      d.setDate(d.getDate()-page)
+      var month = (d.getMonth() + 1).toString().padStart(2,'0')
+      var year = (d.getFullYear()).toString()
+      var day = (d.getDate()).toString().padStart(2,'0')
+      return year + month + day        ////注意 getMonth 这些返回的都是整数而不是字符串
+    }
+  }
 }
 </script>
 <style lang="scss">

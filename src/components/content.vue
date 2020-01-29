@@ -31,11 +31,18 @@ export default {
     Footer
   },
   created(){
-    this.getContent()
+    this.getContent(this.id)
+  },
+  activated(){
+    if(this.id != this.$route.params.id){
+      this.newsinfo = {}
+      this.getContent(this.$route.params.id)
+      this.id = this.$route.params.id
+    }
   },
   methods: {
-    getContent(){
-      this.$http.get('/zhihu/4/news/' + this.id).then(res => {
+    getContent(id){
+      this.$http.get('/zhihu/4/news/' + id).then(res => {
         this.newsinfo = res.body
         this.newsinfo.rgb = this.hugToRgb(this.newsinfo.image_hue)
       })

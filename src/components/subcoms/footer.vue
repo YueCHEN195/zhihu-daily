@@ -22,14 +22,23 @@ export default {
   },
   props: ['id'],
   created(){
-    this.getStoryDetail()
+    this.getStoryDetail(this.id)
+  },
+  activated(){
+    if(this.id != this.$route.params.id){
+      this.popularity = 0
+      this.comments = 0
+      this.favourState = 'false'
+      this.starState = 'false'
+      this.getStoryDetail(this.$route.params.id)
+    }
   },
   methods: {
     back(){
       this.$router.go(-1)
     },
-    getStoryDetail(){
-      this.$http.get('/zhihu/4/story-extra/' + this.id).then(res => {
+    getStoryDetail(id){
+      this.$http.get('/zhihu/4/story-extra/' + id).then(res => {
         this.popularity = res.body.popularity
         this.comments = res.body.comments
       })
