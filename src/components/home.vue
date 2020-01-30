@@ -112,7 +112,7 @@ export default {
       var month = (d.getMonth() + 1).toString().padStart(2,'0')
       var year = (d.getFullYear()).toString()
       var day = (d.getDate()).toString().padStart(2,'0')
-      return year + month + day        ////注意 getMonth 这些返回的都是整数而不是字符串
+      return year + month + day        //注意 getMonth 这些返回的都是整数而不是字符串
     }
   }
 }
