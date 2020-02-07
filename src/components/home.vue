@@ -75,7 +75,6 @@ export default {
         }
         this.otherNews = this.otherNews.concat(res.body.stories)
         this.date = res.body.date
-        console.log(this.date)
         return this.$http.get('/zhihu/4/news/before/' + this.date)
       }, err => {
         Toast(this.toastMsg)
