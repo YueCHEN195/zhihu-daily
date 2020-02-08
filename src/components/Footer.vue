@@ -1,11 +1,11 @@
 <template>
   
   <footer class="footer-nav">
-    <div class="icon-container" @click="back"><img src="../../assets/arrow_left.png"/></div>
-    <router-link tag="div" :to="'/home/newsinfo/comments/' + this.id" class="middle-icon-container"><img src="../../assets/message.png"/><span >{{comments}}</span></router-link>
-    <div class="middle-icon-container"><img src="../../assets/good.png"/><span v-show="popularity!=0">{{popularity}}</span></div>
-    <div class="icon-container"><img src="../../assets/star.png"/></div>
-    <div class="icon-container"><img src="../../assets/share.png"/></div>
+    <div class="icon-container" @click="back"><img src="../assets/arrow_left.png"/></div>
+    <router-link tag="div" :to="'/home/newsinfo/comments/' + this.id" class="middle-icon-container"><img src="../assets/message.png"/><span >{{comments}}</span></router-link>
+    <div class="middle-icon-container"><img src="../assets/good.png"/><span v-show="popularity!=0">{{popularity}}</span></div>
+    <div class="icon-container"><img src="../assets/star.png"/></div>
+    <div class="icon-container"><img src="../assets/share.png"/></div>
   </footer>
 </template>
 

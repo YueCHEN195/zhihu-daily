@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Footer from '../components/subcoms/Footer.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
   data(){

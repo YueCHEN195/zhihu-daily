@@ -40,7 +40,7 @@
 <script>
 import {Toast} from 'mint-ui'
 import { InfiniteScroll } from 'mint-ui'
-import Header from '../components/subcoms/Header.vue'
+import Header from '../components/Header.vue'
 export default {
   components: {
     Header
