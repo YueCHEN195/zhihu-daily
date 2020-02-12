@@ -16,13 +16,13 @@
           <div class="content">{{item.content}}</div>
           <div class="replay" v-if="item.reply_to!=undefined && item.reply_to.author!=undefined">{{'// ' + item.reply_to.author + ' ： '+ item.reply_to.content}}</div>
           <div class="others">
-            <div>{{item.time}}</div>
+            <div>{{item.time|timeFormat}}</div>
             <div class="icon-container"><span>{{item.likes}}</span><img src='../assets/greygood.png'></div>
           </div>
         </div>
       </li>
     </ul>
-    <!-- 段评论 -->
+    <!-- 短评论 -->
     <ul>
       <li class="comments-container" v-for="item in shortComments" :key="item.id">
         <div class="pic">
@@ -33,7 +33,7 @@
           <div class="content">{{item.content}}</div>
           <div class="replay" v-if=" item.reply_to!=undefined &&  item.reply_to.author!=undefined">{{'// ' + item.reply_to.author + ' ： '+ item.reply_to.content}}</div>
           <div class="others">
-            <div>{{item.time}}</div>
+            <div>{{item.time|timeFormat}}</div>
             <div class="icon-container"><span>{{item.likes}}</span><img src='../assets/greygood.png'></div>
           </div>
         </div>
@@ -45,7 +45,13 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 export default {
+  filters: {
+    timeFormat(val){
+      return val = dayjs(val).format('MM-DD HH:mm')
+    }
+  },
   data(){
     return{
       id: this.$route.params.id,
@@ -83,39 +89,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-li ul{
-  padding:0;
-  margin:0;
-  list-style:none;
-  padding-inline-start: 0px;
-}
 .header-container{
+  width:100%;
+  height: 3rem;
   display:flex;
-  width:58%;
-  height: 40px;
   background-color: #ffffff;
   border-top: 1px solid #e7e7e7;
   border-bottom: 1px solid #f8f8f8;
-  justify-content: space-between;
   align-items: center;
   position:fixed;
   top:0;
+  .comment-amount{
+    flex:0.9;
+    text-align: center;
+  }
   img{
-    width:30px;
-    height:30px;
+    width:8%;
   }
 }
 .long-comments{
-  margin-top:40px;
+  margin-top:3.5rem;
 }
 .comments-container{
   display: flex;
-  font-size:13px;
-  padding:10px;
+  font-size:0.8rem;
+  padding:0.5rem;
   width:100%;
   .pic {
-    height: 32px;
-    width:32px;
+    height: 2.3rem;
+    width:2.3rem;
     border-radius: 50%;
     overflow: hidden;
     flex:none;
@@ -125,15 +127,15 @@ li ul{
     }
   }
   .comments{
-    padding:5px;
+    padding:0.3rem;
     width:100%;
     .name{
       font-weight: 600;
-      margin-bottom: 5px;
+      margin-bottom: 0.3rem;
     }
     .replay{
-      padding-top:5px;
-      padding-bottom: 5px;
+      padding-top:0.3rem;
+      padding-bottom: 0.3rem;
       color:grey;
     }
     .others{
@@ -142,12 +144,12 @@ li ul{
     color:grey;
     width:100%;
     .icon-container{
-      height: 18px;
-      width:18px;
+      height: 1rem;
+      width:1rem;
       display: flex;
-      margin-right:15px;
+      margin-right:1rem;
       img{
-        margin-left: 5px;
+        margin-left: 0.5rem;
         width: 100%;
         height: 100%;
       }

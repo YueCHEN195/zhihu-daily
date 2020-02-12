@@ -73,9 +73,9 @@ export default {
     }
   }
   .pic {
-    margin: 3px;
-    width: 50px;
-    height: 50px;
+    margin: 0.3rem;
+    width: 3rem;
+    height: 3rem;
     display: inline-block;
     text-align: center;
     background-color: #fff;

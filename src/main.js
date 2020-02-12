@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import app from './App.vue'
+import './style.scss'
 import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
 import './lib/mui/fonts/mui-icons-extra.ttf'

@@ -121,7 +121,7 @@ export default {
   padding-top: 3.5rem;
 }
 .mint-swipe{
-  height:400px;
+  height:26rem;
   .link{
     width: 100%;
     height: 100%;
@@ -135,14 +135,15 @@ export default {
       flex-direction: column-reverse;
     }
     .author{
-      margin:10px;
-      font-size:13px;
+      margin:0.7692rem;
+      font-size:1rem;
       opacity: 0.8;
     }
     .title{
-      margin:10px;
+      line-height: 1.4rem;
+      margin:0.7692rem;
       font-weight: 600;
-      font-size: 20px;
+      font-size: 1.2rem;
     }
   }
   .mint-swipe-indicators{
@@ -150,8 +151,8 @@ export default {
     -webkit-transform: translateX(-5%);
     transform: translateX(-5%);
     .mint-swipe-indicator{
-      width:6px;
-      height:6px;
+      width:0.4615rem;
+      height:0.4615rem;
       opacity: 0.8;
       background-color: #aaa;
     }
@@ -161,34 +162,29 @@ export default {
     }
   }
 }
-ul,li{ 
-    padding:0;
-    margin:0;
-    list-style:none;
-}
 .news-list {
-  height: 100px;
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   .list-img {
-    padding:5px;
+    padding:0.3846rem;
   }
   .list-word {
-    margin: 10px;
+    margin: 0.5rem;
     .list-title {
       margin:5px;
-      font-weight: 600;
-      font-size:15px;
+      font-size:1rem;
+      font-weight: bold;
     }
     .list-author {
-      margin:5px;
-      font-size:10px;
+      margin:0.3846rem;
+      font-size:0.7692rem;
       color:gray;
     }
   }
   img {
-    height:80px;
-    width:80px;
+    height:5.2rem;
+    width:5.2rem;
   }
 }
 </style>

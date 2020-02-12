@@ -3,7 +3,7 @@
   <keep-alive>
     <router-view v-if="$route.meta.keepAlive"></router-view>
   </keep-alive>
-<router-view v-if="!$route.meta.keepAlive"></router-view>
+  <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
@@ -12,11 +12,5 @@
 
 
 <style lang="scss">
-*{
-    padding:0;
-    margin:0;
- }
-html body{
-  background-color: #fff;
-}
+
 </style>
