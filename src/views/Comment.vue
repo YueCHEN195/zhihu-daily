@@ -67,11 +67,11 @@ export default {
   },
   methods:{
     getLongComments(){
-      this.$http.get('/zhihu/4/story/' + this.id + '/long-comments').then(res => {
-        this.longComments = res.body.comments
-        return this.$http.get('/zhihu/4/story/' + this.id + '/short-comments')
+      this.$http.get('/v1/contents/' + this.id + '/long-comments').then(res => {
+        this.longComments = res.data.COMMENTS.comments
+        return this.$http.get('/v1/contents/' + this.id + '/short-comments')
       }).then(res => {
-        this.shortComments = res.body.comments
+        this.shortComments = res.data.COMMENTS.comments
         this.longCommentsN = this.longComments.length
         this.shortCommentsN = this.shortComments.length
         this.totalComments = this.longCommentsN + this.shortCommentsN

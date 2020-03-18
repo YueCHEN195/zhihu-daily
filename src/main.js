@@ -7,16 +7,14 @@ import './lib/mui/fonts/mui-icons-extra.ttf'
 import 'mint-ui/lib/style.css'
 import VueRouter from 'vue-router'
 import router from './router/index.js'
-import VueResource from 'vue-resource'
 import Mint from 'mint-ui'
+import http from './http'
 
-
+Vue.prototype.$http = http
 
 Vue.use(Mint)
 
 Vue.use(VueRouter)
-
-Vue.use(VueResource)
 
 var vm = new Vue({
   el: '#app',

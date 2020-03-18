@@ -68,26 +68,27 @@ export default {
     },
   methods: {
     getLastNews(){
-      this.$http.get('/zhihu/4/news/latest').then(res => {
-        this.topNews = res.body.top_stories
+      this.$http.get('/v1/last-stories').then(res => {
+        this.topNews = res.data.STORIES.top_stories
         for(let item of this.topNews){
           item.rgb = this.hugToRgb(item.image_hue)
         }
-        this.otherNews = this.otherNews.concat(res.body.stories)
-        this.date = res.body.date
-        return this.$http.get('/zhihu/4/news/before/' + this.date)
+        this.otherNews = this.otherNews.concat(res.data.STORIES.stories)
+        this.date = res.data.STORIES.date
+        return this.$http.get('/v1/before-stories/' + this.date)
       }, err => {
+        console.log(err)
         Toast(this.toastMsg)
       }).then(res => {
-        this.otherNews = this.otherNews.concat(res.body.stories)  //继续往前加载一次防止消息不能占满屏幕无法触发滚动
+        this.otherNews = this.otherNews.concat(res.data.STORIES.stories)  //继续往前加载一次防止消息不能占满屏幕无法触发滚动
       },err => {
         Toast(this.toastMsg)
       })
     },
     getListByPage(){
       this.index = this.reduceDate(this.date,this.page)
-      this.$http.get('/zhihu/4/news/before/' + this.index).then(res => {
-        this.otherNews = this.otherNews.concat(res.body.stories)
+      this.$http.get('/v1/before-stories/' + this.index).then(res => {
+        this.otherNews = this.otherNews.concat(res.data.STORIES.stories)
       },err =>{
         Toast(this.toastMsg)
       })

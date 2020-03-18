@@ -38,9 +38,9 @@ export default {
       this.$router.go(-1)
     },
     getStoryDetail(id){
-      this.$http.get('/zhihu/4/story-extra/' + id).then(res => {
-        this.popularity = res.body.popularity
-        this.comments = res.body.comments
+      this.$http.get('/v1/contents/extra/' + id).then(res => {
+        this.popularity = res.data.DES.popularity
+        this.comments = res.data.DES.comments
       })
     },
   }

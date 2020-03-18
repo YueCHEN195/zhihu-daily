@@ -42,8 +42,8 @@ export default {
   },
   methods: {
     getContent(id){
-      this.$http.get('/zhihu/4/news/' + id).then(res => {
-        this.newsinfo = res.body
+      this.$http.get('/v1/contents/' + id).then(res => {
+        this.newsinfo = res.data.CONTENTS
         this.newsinfo.rgb = this.hugToRgb(this.newsinfo.image_hue)
       })
     },
