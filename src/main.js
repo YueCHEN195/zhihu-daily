@@ -1,18 +1,23 @@
 import Vue from 'vue'
 import app from './App.vue'
-import './style.scss'
-import './lib/mui/css/mui.min.css'
-import './lib/mui/css/icons-extra.css'
-import './lib/mui/fonts/mui-icons-extra.ttf'
-import 'mint-ui/lib/style.css'
 import VueRouter from 'vue-router'
 import router from './router/index.js'
-import Mint from 'mint-ui'
 import http from './http'
+import {Icon,Toast,Swipe, SwipeItem, List, PullRefresh, Loading, Skeleton,Tabbar, TabbarItem,NavBar} from 'vant'
 
 Vue.prototype.$http = http
 
-Vue.use(Mint)
+Vue.use(Swipe)
+Vue.use(SwipeItem)
+Vue.use(List)
+Vue.use(PullRefresh)
+Vue.use(Loading)
+Vue.use(Skeleton)
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
+Vue.use(NavBar)
+Vue.use(Toast)
+Vue.use(Icon)
 
 Vue.use(VueRouter)
 

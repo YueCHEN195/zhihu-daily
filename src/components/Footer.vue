@@ -1,12 +1,12 @@
 <template>
-  
-  <footer class="footer-nav">
-    <div class="icon-container" @click="back"><img src="../assets/arrow_left.png"/></div>
-    <router-link tag="div" :to="'/home/newsinfo/comments/' + this.id" class="middle-icon-container"><img src="../assets/message.png"/><span >{{comments}}</span></router-link>
-    <div class="middle-icon-container"><img src="../assets/good.png"/><span v-show="popularity!=0">{{popularity}}</span></div>
-    <div class="icon-container"><img src="../assets/star.png"/></div>
-    <div class="icon-container"><img src="../assets/share.png"/></div>
-  </footer>
+  <van-tabbar active-color="#7d7e80">
+    <van-tabbar-item icon="arrow-left" @click="back">后退</van-tabbar-item>
+    <van-tabbar-item icon="comment-o" :info="comments" :to="'/home/newsinfo/comments/' + id">评论</van-tabbar-item>
+    <van-tabbar-item icon="good-job-o" v-if="!favourState" :info="popularity" @click="addFavour">点赞</van-tabbar-item>
+    <van-tabbar-item icon="good-job" v-if="favourState" :info="popularity + 1" @click="removeFavour">点赞</van-tabbar-item>
+    <van-tabbar-item icon="star-o" v-if="!starState" @click="addToCollection">收藏</van-tabbar-item>
+    <van-tabbar-item icon="star" v-if="starState" @click="removeFromCollection">收藏</van-tabbar-item>
+  </van-tabbar>
 </template>
 
 
@@ -16,11 +16,11 @@ export default {
     return{
       popularity:0,
       comments:0,
-      favourState:'false',
-      starState:'false'
+      favourState: false,
+      starState: false,
     }
   },
-  props: ['id'],
+  props: ['id','title','img'],
   created(){
     this.getStoryDetail(this.id)
   },
@@ -28,8 +28,8 @@ export default {
     if(this.id != this.$route.params.id){
       this.popularity = 0
       this.comments = 0
-      this.favourState = 'false'
-      this.starState = 'false'
+      this.favourState = false
+      this.starState = false
       this.getStoryDetail(this.$route.params.id)
     }
   },
@@ -37,12 +37,36 @@ export default {
     back(){
       this.$router.go(-1)
     },
-    getStoryDetail(id){
-      this.$http.get('/v1/contents/extra/' + id).then(res => {
+    async getStoryDetail(id){
+      try{
+        const res = await this.$http.get('/v1/contents/extra/' + id)
         this.popularity = res.data.DES.popularity
         this.comments = res.data.DES.comments
-      })
+      }catch(err){
+        console.log(err)
+      }
     },
+    // 点赞，收藏这部分没有接口，只能玩单机，刷新就失效了
+    addToCollection(){
+      this.starState = true
+      let storage = window.localStorage
+      let article = JSON.stringify({id: this.id, title:this.title, img: this.img})
+      this.$toast('已添加至收藏')
+    },
+    removeFromCollection(){
+      this.starState = false
+      let storage = window.localStorage
+      storage.removeItem(this.id)
+      this.$toast('已从收藏列表移除')
+    },
+    addFavour(){
+      this.favourState = true
+      this.$toast('已点赞')
+    },
+    removeFavour(){
+      this.favourState = false
+      this.$toast('已取消点赞')
+    }
   }
 }
 </script>
@@ -50,43 +74,11 @@ export default {
 
 <style lang="scss">
 
-.footer-nav{
-  display: flex;
-  position:fixed;
-  width:100vw;
-  background-color: #ffffff;
-  bottom:0;
-  height:60px;
-  justify-content: space-between;
-  border-top: 1px solid #e7e7e7;
-  border-bottom: 1px solid #f8f8f8;
-  padding-bottom: 20px;
-  padding-left:20px;
-  padding-right:20px;
-  padding-top: 2px;
-  align-items: center;
-  .middle-icon-container{
-    height:25px;
-    width: 25px;
-    display:flex;
-    span{
-      font-size:12px;
-      -webkit-transform: scale(0.85);
-    }
-    img{
-      width:100%;
-      height: 100%;
-    }
-  }
-  .icon-container{
-      height:25px;
-      width: 25px;
-    
-    img{
-      width:100%;
-      height:100%;
-    }
-  }
+.van-info {
+  transform: translate(85%,-50%);
+  color: #646566;
+  background-color: #fff;
+
 }
 
 

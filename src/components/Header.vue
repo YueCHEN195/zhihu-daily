@@ -22,7 +22,7 @@ export default {
     return{
       month: '一月',
       day:'26',
-      msg:''
+      msg:'数据来源：知乎'
     }
   },
   created(){
@@ -44,7 +44,6 @@ export default {
   top:0;
   left:0;
   z-index:20;
-
   display: flex;
   justify-content: space-between;
   align-items: center;

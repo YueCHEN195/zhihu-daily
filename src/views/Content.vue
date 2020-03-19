@@ -1,5 +1,6 @@
 <template>
   <div class="content-page" :id="id">
+    <van-skeleton title :row="7" title-width="100%" :loading="loading">
     <div :style="{backgroundImage: 'url(' + newsinfo.image + ')',
         backgroundRepeat:'no-repeat',backgroundSize:'100% 100%'}" class="content-header">
         <div class="cover" v-if = "newsinfo.rgb"
@@ -13,7 +14,8 @@
         </div>
     </div>
     <div v-html="newsinfo.body" class="detail-content"></div>
-    <Footer :id="id"></Footer>
+    </van-skeleton>
+    <Footer :id="id" :title="newsinfo.title" :img="newsinfo.image"></Footer>
   </div>
 </template>
 
@@ -24,7 +26,8 @@ export default {
   data(){
     return{
       id: this.$route.params.id,
-      newsinfo:{}
+      newsinfo:{},
+      loading: true
     }
   },
   components:{
@@ -35,17 +38,22 @@ export default {
   },
   activated(){
     if(this.id != this.$route.params.id){
-      this.newsinfo = {}
+      this.newsinfo = {},
+      this.loading = true
       this.getContent(this.$route.params.id)
       this.id = this.$route.params.id
     }
   },
   methods: {
-    getContent(id){
-      this.$http.get('/v1/contents/' + id).then(res => {
+    async getContent(id){
+      try{
+        const res = await this.$http.get('/v1/contents/' + id)
         this.newsinfo = res.data.CONTENTS
         this.newsinfo.rgb = this.hugToRgb(this.newsinfo.image_hue)
-      })
+        this.loading = false
+      }catch(err){
+        console.log(err)
+      }
     },
     hugToRgb(str){
       var one = str.substring(2,4)
@@ -59,11 +67,14 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss">
 .content-page{
+  .van-skeleton__title{
+    height: 24rem;
+  }
   display:flex;
   flex-direction: column;
   .content-header{
     width: 100%;
-    height: 26rem;
+    height: 24rem;
     color:#fff;
     display: flex;
     flex-direction: column-reverse;
