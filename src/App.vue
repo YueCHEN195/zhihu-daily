@@ -1,12 +1,13 @@
 <template>
-  <div class="app-container">
-    <transition :name="transitionName">
+  <div id="app">
+    <!-- <transition :name="transitionName">
+      <keep-alive :include="['home','my-content']">
+        <router-view></router-view>
+      </keep-alive>
+    </transition> -->
     <keep-alive :include="['home','my-content']">
-      
-      <router-view></router-view>
-      
+      <router-view v-transition></router-view>
     </keep-alive>
-    </transition>
   </div>
 </template>
 
@@ -23,9 +24,9 @@ export default {
       //如果to索引大于from索引,判断为前进状态,反之则为后退状态
       if(to.meta.index > from.meta.index){
 	    //设置动画名称
-        this.transitionName = 'slide-left';
+        this.transitionName = 'fold-left';
       }else{
-        this.transitionName = 'slide-right';
+        this.transitionName = 'fold-right';
       }
     }
   }
@@ -33,26 +34,54 @@ export default {
 </script>
 
 <style lang="scss">
-.slide-right-enter-active,
-.slide-right-leave-active,
-.slide-left-enter-active,
-.slide-left-leave-active {
-  transition: all 500ms;
+.fold-left-enter-active {
+  animation-name: fold-left-in;
+  animation-duration: .5s;
 }
-.slide-right-enter {
-  opacity: 0;
-  transform: translate3d(-100%, 0, 0);
+.fold-left-leave-active {
+  animation-name: fold-left-out;
+  animation-duration: .5s;
 }
-.slide-right-leave-active {
-  opacity: 0;
-  transform: translate3d(100%, 0, 0);
+.fold-right-enter-active {
+  animation-name: fold-right-in;
+  animation-duration: .5s;
 }
-.slide-left-enter {
-  opacity: 0;
-  transform: translate3d(100%, 0, 0);
+.fold-right-leave-active {
+  animation-name: fold-right-out;
+  animation-duration: .5s;
 }
-.slide-left-leave-active {
-  opacity: 0;
-  transform: translate3d(-100%, 0, 0);
+
+@keyframes fold-left-in {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fold-left-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes fold-right-in {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fold-right-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+  }
 }
 </style>

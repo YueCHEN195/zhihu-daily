@@ -17,7 +17,8 @@
     "mint-ui": "^2.2.13",
     "vant": "^2.5.5",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vueg": "^1.4.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

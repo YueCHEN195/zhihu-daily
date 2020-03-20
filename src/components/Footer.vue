@@ -51,21 +51,21 @@ export default {
       this.starState = true
       let storage = window.localStorage
       let article = JSON.stringify({id: this.id, title:this.title, img: this.img})
-      this.$toast('已添加至收藏')
+      this.$toast({message: '已添加至收藏',positon:'bottom'})
     },
     removeFromCollection(){
       this.starState = false
       let storage = window.localStorage
       storage.removeItem(this.id)
-      this.$toast('已从收藏列表移除')
+      this.$toast({message: '已从收藏列表移除',positon:'bottom'})
     },
     addFavour(){
       this.favourState = true
-      this.$toast('已点赞')
+      this.$toast({message: '已点赞',positon:'bottom'})
     },
     removeFavour(){
       this.favourState = false
-      this.$toast('已取消点赞')
+      this.$toast({message: '已取消点赞',positon:'bottom'})
     }
   }
 }

@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 import router from './router/index.js'
 import http from './http'
 import {Icon,Toast,Swipe, SwipeItem, List, PullRefresh, Loading, Skeleton,Tabbar, TabbarItem,NavBar} from 'vant'
-
+import vueg from 'vueg'
+import './utils/back.js'
 
 Vue.prototype.$http = http
 
@@ -19,9 +20,8 @@ Vue.use(TabbarItem)
 Vue.use(NavBar)
 Vue.use(Toast)
 Vue.use(Icon)
-
-
 Vue.use(VueRouter)
+Vue.use(vueg, router,{shadow: false})
 
 var vm = new Vue({
   el: '#app',
