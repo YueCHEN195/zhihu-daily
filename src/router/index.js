@@ -7,9 +7,9 @@ import comment from '../views/Comment.vue'
 var router = new VueRouter({
   routes: [
     {path:'/',redirect:'/home'},
-    {path: '/home', component: home, meta:{ keepAlive: true} },
-    {path: '/home/newsinfo/:id',component: content ,meta:{ keepAlive: true}},
-    {path: '/home/newsinfo/comments/:id',component:comment }
+    {path: '/home', component: home, name:'home' ,meta:{index: 0}},
+    {path: '/home/newsinfo/:id',component: content ,name:'content',meta:{index: 1}},
+    {path: '/home/newsinfo/comments/:id',component:comment, name:'comment',meta:{index: 2}}
   ]
 })
 

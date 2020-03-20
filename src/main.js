@@ -5,6 +5,7 @@ import router from './router/index.js'
 import http from './http'
 import {Icon,Toast,Swipe, SwipeItem, List, PullRefresh, Loading, Skeleton,Tabbar, TabbarItem,NavBar} from 'vant'
 
+
 Vue.prototype.$http = http
 
 Vue.use(Swipe)
@@ -18,6 +19,7 @@ Vue.use(TabbarItem)
 Vue.use(NavBar)
 Vue.use(Toast)
 Vue.use(Icon)
+
 
 Vue.use(VueRouter)
 

@@ -23,6 +23,7 @@
 import Footer from '../components/Footer.vue'
 import '../assets/article.scss'
 export default {
+  name:'my-content',
   data(){
     return{
       id: this.$route.params.id,
@@ -60,6 +61,9 @@ export default {
       var two = str.substring(4,6)
       var three = str.substring(6,8)
       return[parseInt('0x' + one),parseInt('0x' + two),parseInt('0x' + three)]
+    },
+    back(){
+      this.$router.go(-1)
     }
   },
 }

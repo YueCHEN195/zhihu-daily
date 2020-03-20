@@ -74,6 +74,7 @@
 <script>
 import dayjs from 'dayjs'
 export default {
+  name:'comment',
   filters: {
     timeFormat(val){
       return val = dayjs(val).format('MM-DD HH:mm')
@@ -137,10 +138,6 @@ export default {
         this.shortComments[i].favourState = false
       }
     }
-  },
-  beforeRouteLeave (to, from, next) {
-    to.meta.keepAlive = true
-    next()
   },
   computed: {
     totalComments(){
