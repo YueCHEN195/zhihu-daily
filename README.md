@@ -2,6 +2,12 @@
 
 > A demo based on zhihu Daily API.
 
+# 体验地址
+
+https://yuechen195.github.io/zhihu-daily/
+
+网速会有些慢，请耐心
+
 ## Build Setup
 
 ``` bash
