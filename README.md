@@ -1,12 +1,13 @@
-# zhihu
+# zhihu-daily
 
-> A demo based on zhihu Daily API.
+> 本项目数据接口来自知乎，仅做个人学习所有，如果侵权，请联系删除
 
 ## 体验地址
 
 https://yuechen195.github.io/zhihu-daily/
 
-网速会有些慢，请耐心
+网速会有些慢，请耐心。
+项目还在持续更新中.......
 
 ## Build Setup
 
