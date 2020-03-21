@@ -2,7 +2,7 @@
 
 > A demo based on zhihu Daily API.
 
-# 体验地址
+## 体验地址
 
 https://yuechen195.github.io/zhihu-daily/
 
