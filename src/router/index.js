@@ -1,8 +1,8 @@
 import VueRouter from 'vue-router'
-import home from '../views/Home.vue'
-import content from '../views/Content.vue'
-import comment from '../views/Comment.vue'
 
+const home = () => import('../views/Home.vue')
+const content = () => import('../views/Content.vue')
+const comment = () => import('../views/Comment.vue')
 // 3. 创建路由对象
 var router = new VueRouter({
   routes: [
