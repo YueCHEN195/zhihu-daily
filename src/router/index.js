@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 const home = () => import('../views/Home.vue')
 const content = () => import('../views/Content.vue')
 const comment = () => import('../views/Comment.vue')
-// 3. 创建路由对象
+
 var router = new VueRouter({
   routes: [
     {path:'/',redirect:'/home'},
@@ -13,5 +13,5 @@ var router = new VueRouter({
   ]
 })
 
-// 把路由对象暴露出去
+
 export default router
